@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.api.dao.ArticleMapper">
+    <resultMap id="BaseResultMap" type="cc.mrbird.febs.api.domain.Article">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+        <result column="collect" jdbcType="INTEGER" property="collect" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, title, content, `like_count`, `collect`, `url`, create_by, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="banner" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+        order by like_count desc;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cc.mrbird.febs.api.domain.Article" useGeneratedKeys="true">
+    insert into article (title, content, `like_count`,
+      `collect`,`url`, create_by, create_time
+      )
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{likeCount,jdbcType=INTEGER},
+      #{collect,jdbcType=INTEGER},#{url,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cc.mrbird.febs.api.domain.Article" useGeneratedKeys="true">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="likeCount != null">
+                `like_count`,
+            </if>
+            <if test="collect != null">
+                `collect`,
+            </if>
+            <if test="url != null">
+                `url`,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="likeCount != null">
+                #{likeCount,jdbcType=INTEGER},
+            </if>
+            <if test="collect != null">
+                #{collect,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cc.mrbird.febs.api.domain.Article">
+        update article
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="likeCount != null">
+                `like_count` = #{likeCount,jdbcType=INTEGER},
+            </if>
+            <if test="collect != null">
+                `collect` = #{collect,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                content = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cc.mrbird.febs.api.domain.Article">
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      `like_count` = #{likeCount,jdbcType=INTEGER},
+      `collect` = #{collect,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -8,7 +8,7 @@ spring:
       p6spy: true
       hikari:
         connection-timeout: 30000
-        max-lifetime: 1800000
+        max-lifetime: 18000
         max-pool-size: 15
         min-idle: 5
         connection-test-query: select 1
@@ -18,10 +18,10 @@ spring:
       datasource:
         # 数据源-1，名称为 primary
         primary:
-          username: root
-          password: 123456
+          username: test_user
+          password: test_user
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/febs_shiro_jwt?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+          url: jdbc:mysql://106.52.50.241:3306/le_wen?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         # 数据源-2，名称为 test
 #        test:
 #          username: root
@@ -53,7 +53,7 @@ spring:
 
 #mybatis plus 设置
 mybatis-plus:
-  type-aliases-package: cc.mrbird.febs.system.domain,cc.mrbird.febs.job.domain
+  type-aliases-package: cc.mrbird.febs.system.domain,cc.mrbird.febs.job.domain,cc.mrbird.febs.api.domain
   mapper-locations: classpath:mapper/*/*.xml
   configuration:
     jdbc-type-for-null: null
@@ -78,6 +78,6 @@ febs:
         num: 1000
   shiro:
     # 后端免认证接口 url
-    anonUrl: /login,/logout/**,/regist,/user/check/**
+    anonUrl: /login,/logout/**,/regist,/user/check/**,/api/**,/swagger-ui.html,/swagger-ui.html/**,/api-docs,/v2/api-docs/**,/webjars/**,/swagger-resources/**,/v2/**
     # token有效期，单位秒
     jwtTimeOut: 3600

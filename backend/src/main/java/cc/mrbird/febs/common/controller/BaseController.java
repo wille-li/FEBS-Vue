@@ -9,8 +9,14 @@ public class BaseController {
 
     protected Map<String, Object> getDataTable(IPage<?> pageInfo) {
         Map<String, Object> rspData = new HashMap<>();
-        rspData.put("rows", pageInfo.getRecords());
-        rspData.put("total", pageInfo.getTotal());
+        if (pageInfo != null) {
+            rspData.put("rows", pageInfo.getRecords());
+            rspData.put("total", pageInfo.getTotal());
+        } else {
+            rspData.put("rows", null);
+            rspData.put("total", 0);
+        }
+
         return rspData;
     }
 
