@@ -8,6 +8,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.Security;
 
 /**
@@ -17,9 +18,9 @@ public class WechatUtil {
 
     public static void main(String[] args) {
         String result = decryptData(
-                "CiyLU1Aw2KjvrjMdj8YKliAjtP4gsMZMQmRzooG2xrDcvSnxIMXFufNstNGTyaGS9uT5geRa0W4oTOb1WT7fJlAC+oNPdbB+3hVbJSRgv+4lGOETKUQz6OYStslQ142dNCuabNPGBzlooOmB231qMM85d2/fV6ChevvXvQP8Hkue1poOFtnEtpyxVLW1zAo6/1Xx1COxFvrc2d7UL/lmHInNlxuacJXwu0fjpXfz/YqYzBIBzD6WUfTIF9GRHpOn/Hz7saL8xz+W//FRAUid1OksQaQx4CMs8LOddcQhULW4ucetDf96JcR3g0gfRK4PC7E/r7Z6xNrXd2UIeorGj5Ef7b1pJAYB6Y5anaHqZ9J6nKEBvB4DnNLIVWSgARns/8wR2SiRS7MNACwTyrGvt9ts8p12PKFdlqYTopNHR1Vf7XjfhQlVsAJdNiKdYmYVoKlaRv85IfVunYzO0IKXsyl7JCUjCpoG20f0a04COwfneQAGGwd5oa+T8yO5hzuyDb/XcxxmK01EpqOyuxINew==",
-                "tiihtNczf5v6AKRyjwEUhQ==",
-                "r7BXXKkLb8qrSNn05n0qiA=="
+                "04cciGz45aj+RPBOdYNbaetp+4M2N76r0j7GFlXIG2D+PhqA7TvfK4Y6sgBEUP4c2LV8bEgWkYTO7hv3R1vAqxJo6WJTYp6BsO8c7zgPFvH+743ZQI9sti/OF+rzy2bmV9Stcn320e75pTaH1i5bhBTtqkHKXKxkPHMlAfQj1wgABCZJ+xumbe61kQJ+1exG/+YtN3YR9ruOMVVmnI9OtZ2++z2Pu3EaHVepNM85VqlRPp1jxp5UCpX5svlZMUy/vHPShPfmTzthtDGPOSsnpoCFZeMvfj7T5L+IkRzaLMgPdBjKmGjAUawc76B83isr110rGe+SapmgoST61IushExgfHQWjl6YSja/pHEJ5hRmG7ptBeKRG443z/M0IkN4AcLC8n1MjlnvdA6r/QAdXINatQokeEAhG9luVFE/4sRTzNbXDkhGggFWs544svpNDZAQcn00EvumhyLnpgf8tifYoN1LNEBk2ESWC0tajqg=",
+                "d8a2727cd73ae7556ab00c7171b2b7378243bea9",
+                "vokFo1h1RvOASFdjoJ5PJg=="
         );
         System.out.println("result = " + result);
     }
@@ -53,6 +54,7 @@ public class WechatUtil {
         Security.addProvider(new BouncyCastleProvider());
         // 转化成JAVA的密钥格式
         key = new SecretKeySpec(keyBytes, KEY_ALGORITHM);
+        System.out.println(key.getEncoded());
         try {
             // 初始化cipher
             cipher = Cipher.getInstance(ALGORITHM_STR, "BC");
@@ -80,4 +82,28 @@ public class WechatUtil {
         }
         return encryptedText;
     }
+
+    public static String shaEncode(String inStr) throws Exception {
+        MessageDigest sha = null;
+        try {
+            sha = MessageDigest.getInstance("SHA");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+            return "";
+        }
+
+        byte[] byteArray = inStr.getBytes("UTF-8");
+        byte[] md5Bytes = sha.digest(byteArray);
+        StringBuffer hexValue = new StringBuffer();
+        for (int i = 0; i < md5Bytes.length; i++) {
+            int val = ((int) md5Bytes[i]) & 0xff;
+            if (val < 16) {
+                hexValue.append("0");
+            }
+            hexValue.append(Integer.toHexString(val));
+        }
+        return hexValue.toString();
+    }
+
 }
