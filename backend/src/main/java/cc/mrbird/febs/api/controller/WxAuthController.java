@@ -55,7 +55,7 @@ public class WxAuthController extends BaseController {
     @ApiOperation("微信注册")
     public Result register(@RequestBody WxResVO vo) throws FebsException, RedisConnectException {
 
-        User user = wxAuthService.register(vo);
+        //User user = wxAuthService.register(vo);
         return ResultUtil.success(WXCoreUtil.decrypt(vo.getEncryptedData(), vo.getSignature(), vo.getIv()));
     }
 
