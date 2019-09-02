@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 @Validated
 @RestController
 @RequestMapping("movie")
+@Deprecated
 public class MovieController {
 
     private String message;

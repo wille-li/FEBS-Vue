@@ -8,9 +8,6 @@ import lombok.Data;
 @ApiModel(value="问题对象", description="问题")
 public class QuestionVO {
 
-    @ApiModelProperty(value = "问题题目" ,required=true)
-    private String title;
-
     @ApiModelProperty(value = "问题内容" ,required=true)
     private String content;
 

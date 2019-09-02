@@ -3,7 +3,6 @@
 <mapper namespace="cc.mrbird.febs.api.dao.QuestionMapper">
     <resultMap id="BaseResultMap" type="cc.mrbird.febs.api.domain.Question">
         <id column="id" jdbcType="INTEGER" property="id" />
-        <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="mode" jdbcType="INTEGER" property="mode" />
         <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
@@ -13,7 +12,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, content, `mode`, teacher_id, price, `status`, create_by_wx, create_time
+    id, content, `mode`, teacher_id, price, `status`, create_by_wx, create_time
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -26,19 +25,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cc.mrbird.febs.api.domain.Question" useGeneratedKeys="true">
-    insert into question (title, content, `mode`,
+    insert into question ( content, `mode`,
       teacher_id, price, `status`,
       create_by_wx, create_time)
-    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mode,jdbcType=INTEGER},
+    values (#{content,jdbcType=VARCHAR}, #{mode,jdbcType=INTEGER},
       #{teacherId,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
       #{createByWx,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cc.mrbird.febs.api.domain.Question" useGeneratedKeys="true">
         insert into question
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="title != null">
-                title,
-            </if>
             <if test="content != null">
                 content,
             </if>
@@ -62,9 +58,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
             </if>
@@ -91,9 +84,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="cc.mrbird.febs.api.domain.Question">
         update question
         <set>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
-            </if>
             <if test="content != null">
                 content = #{content,jdbcType=VARCHAR},
             </if>
@@ -120,8 +110,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="cc.mrbird.febs.api.domain.Question">
     update question
-    set title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
+    set content = #{content,jdbcType=VARCHAR},
       `mode` = #{mode,jdbcType=INTEGER},
       teacher_id = #{teacherId,jdbcType=VARCHAR},
       price = #{price,jdbcType=INTEGER},

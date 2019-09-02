@@ -21,6 +21,7 @@
             </a-input>
           </a-form-item>
         </a-tab-pane>
+        <!--
         <a-tab-pane tab="手机号登录" key="2">
           <a-form-item>
             <a-input size="large">
@@ -40,6 +41,7 @@
             </a-row>
           </a-form-item>
         </a-tab-pane>
+        -->
       </a-tabs>
       <a-form-item>
         <a-button :loading="loading" style="width: 100%; margin-top: 4px" size="large" htmlType="submit" type="primary">

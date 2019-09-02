@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 @Validated
 @RestController
 @RequestMapping("weather")
+@Deprecated
 public class WeatherController {
 
     @GetMapping

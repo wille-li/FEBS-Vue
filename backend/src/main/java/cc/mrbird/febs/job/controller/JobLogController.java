@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Slf4j
 @Validated
-@RestController
+//@RestController
 @RequestMapping("job/log")
 public class JobLogController extends BaseController {
 

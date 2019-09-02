@@ -16,4 +16,6 @@ public class WxSessionVO implements Serializable {
     String errcode;
 
     String errmsg;
+
+    UserVO userVO;
 }

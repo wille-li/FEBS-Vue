@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.system.dao.QAMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cc.mrbird.febs.system.domain.QA">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="question_id" jdbcType="INTEGER" property="questionId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="question_content" jdbcType="VARCHAR" property="questionContent"/>
+        <result column="teacher_name" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="voice_id" jdbcType="INTEGER" property="voiceId"/>
+        <result column="voice_time" jdbcType="INTEGER" property="voiceTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+
+    </resultMap>
+
+    <update id="updateStatus">
+		UPDATE answer set status = #{status} WHERE id = #{id}
+	</update>
+
+</mapper>

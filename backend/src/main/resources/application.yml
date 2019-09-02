@@ -19,12 +19,17 @@ spring:
         # 数据源-1，名称为 primary
         primary:
           username: root
-          password: root
+          password: YYBrhr_2018
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/le_wen?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+          url: jdbc:mysql://129.211.119.179:3306/le_wen?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         # 数据源-2，名称为 test
 #        test:
-#          username: root
+#  username: test_user
+#  password: test_user
+#  driver-class-name: com.mysql.cj.jdbc.Driver
+#  url: jdbc:mysql://106.52.50.241:3306/le_wen?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+  #          username: root
 #          password: 123456
 #          driver-class-name: com.mysql.cj.jdbc.Driver
 #          url: jdbc:mysql://127.0.0.1:3306/febs_test?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
@@ -81,3 +86,14 @@ febs:
     anonUrl: /login,/logout/**,/regist,/user/check/**,/api/**,/swagger-ui.html,/swagger-ui.html/**,/api-docs,/v2/api-docs/**,/webjars/**,/swagger-resources/**,/v2/**
     # token有效期，单位秒
     jwtTimeOut: 3600
+
+wx:
+  auth:
+    url: https://api.weixin.qq.com/sns/jscode2session
+    appId: wx5fddd9d10dc1a859
+    secret: a6df3f45b089f177ab4fe9cc7f16b2bb
+
+sms:
+  app:
+    id: 1400247908
+    key: 420ebf33a3d4c952aa8814493d781c9b

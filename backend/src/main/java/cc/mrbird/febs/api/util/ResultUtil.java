@@ -16,6 +16,14 @@ public class ResultUtil {
         return result;
     }
 
+    public static Result fail(String msg){
+        Result result = new Result();
+        result.setCode(-1);
+        result.setMsg(msg);
+
+        return result;
+    }
+
     public static Result success(){
         return success(null);
     }

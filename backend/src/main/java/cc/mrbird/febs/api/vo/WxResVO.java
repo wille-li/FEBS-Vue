@@ -34,4 +34,8 @@ public class WxResVO {
     String code;
 
     String openid;
+
+    String validCode;
+
+    String phoneNum;
 }

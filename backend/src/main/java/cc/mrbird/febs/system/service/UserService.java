@@ -17,6 +17,14 @@ public interface UserService extends IService<User> {
     User findByName(String username);
 
     /**
+     * 通过用户名查找用户
+     *
+     * @param openId username
+     * @return user
+     */
+    User findByOpenId(String openId);
+
+    /**
      * 查询用户详情，包括基本信息，用户角色，用户部门
      *
      * @param user user
@@ -91,4 +99,6 @@ public interface UserService extends IService<User> {
      */
     void resetPassword(String[] usernames) throws Exception;
 
+
+    void bindingPhone(String openId, String phoneNum);
 }

@@ -50,6 +50,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return baseMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
     }
 
+    @Override
+    public User findByOpenId(String openId) {
+        return this.baseMapper.findByOpenId(openId);
+    }
+
 
     @Override
     public IPage<User> findUserDetail(User user, QueryRequest request) {
@@ -198,6 +203,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             cacheService.saveUser(username);
         }
 
+    }
+
+    @Override
+    public void bindingPhone(String openId, String phoneNum) {
+        this.baseMapper.bindingPhone(openId, phoneNum);
     }
 
     private void setUserRoles(User user, String[] roles) {

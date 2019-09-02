@@ -26,6 +26,14 @@
     from wx_third
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectCountByWxOpenId" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+      count(1)
+    from wx_third
+    where openId = #{openid}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from wx_third
     where id = #{id,jdbcType=INTEGER}

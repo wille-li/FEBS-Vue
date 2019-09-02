@@ -17,4 +17,9 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 用户信息
      */
     User findDetail(String username);
+
+
+    void bindingPhone(@Param("openId") String openId, @Param("phoneNum") String phoneNum);
+
+    User findByOpenId(@Param("openId") String openId);
 }

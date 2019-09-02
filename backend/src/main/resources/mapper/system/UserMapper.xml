@@ -4,10 +4,12 @@
     <resultMap id="BaseResultMap" type="cc.mrbird.febs.system.domain.User">
         <id column="USER_ID" jdbcType="DECIMAL" property="userId"/>
         <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName"/>
         <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
         <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId"/>
         <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
         <result column="MOBILE" jdbcType="VARCHAR" property="mobile"/>
+        <result column="BALANCE" jdbcType="DECIMAL" property="balance"/>
         <result column="STATUS" jdbcType="CHAR" property="status"/>
         <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime"/>
@@ -15,15 +17,18 @@
         <result column="SSEX" jdbcType="CHAR" property="ssex"/>
         <result column="AVATAR" jdbcType="VARCHAR" property="avatar"/>
         <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="OPEN_ID" jdbcType="VARCHAR" property="openId"/>
     </resultMap>
 
     <select id="findUserDetail" resultType="user" parameterType="user">
         SELECT
         u.user_id userId,
         u.username,
+        u.nick_name,
         u.password,
         u.email,
         u.mobile,
+        u.balance,
         u. STATUS,
         u.create_time createTime,
         u.ssex,
@@ -33,7 +38,8 @@
         u.DESCRIPTION,
         u.LAST_LOGIN_TIME lastLoginTime,
         GROUP_CONCAT(r.role_id) roleId,
-        GROUP_CONCAT(r.ROLE_NAME) roleName
+        GROUP_CONCAT(r.ROLE_NAME) roleName,
+        u.open_id
         FROM
         t_user u
         LEFT JOIN t_dept d ON (u.dept_id = d.dept_id)
@@ -66,9 +72,11 @@
         SELECT
         u.user_id userId,
         u.username,
+        u.nick_name,
         u.password,
         u.email,
         u.mobile,
+        u.balance,
         u. STATUS,
         u.create_time createTime,
         u.ssex,
@@ -78,7 +86,8 @@
         u.DESCRIPTION,
         u.LAST_LOGIN_TIME lastLoginTime,
         GROUP_CONCAT(r.role_id) roleId,
-        GROUP_CONCAT(r.ROLE_NAME) roleName
+        GROUP_CONCAT(r.ROLE_NAME) roleName,
+        u.open_id
         FROM
         t_user u
         LEFT JOIN t_dept d ON (u.dept_id = d.dept_id)
@@ -87,4 +96,37 @@
         WHERE  u.username = #{username}
         group by u.username
     </select>
+
+    <select id="findByOpenId" resultType="user" parameterType="string">
+        SELECT
+        u.user_id userId,
+        u.username,
+        u.nick_name,
+        u.password,
+        u.email,
+        u.mobile,
+        u.balance,
+        u. STATUS,
+        u.create_time createTime,
+        u.ssex,
+        d.dept_id deptId,
+        d.dept_name deptName,
+        u.AVATAR,
+        u.DESCRIPTION,
+        u.LAST_LOGIN_TIME lastLoginTime,
+        GROUP_CONCAT(r.role_id) roleId,
+        GROUP_CONCAT(r.ROLE_NAME) roleName,
+        u.open_id
+        FROM
+        t_user u
+        LEFT JOIN t_dept d ON (u.dept_id = d.dept_id)
+        LEFT JOIN t_user_role ur ON (u.user_id = ur.user_id)
+        LEFT JOIN t_role r ON r.role_id = ur.role_id
+        WHERE  u.open_id = #{openId}
+        group by u.username
+    </select>
+
+    <update id="bindingPhone">
+        update t_user set username = #{phoneNum} where username = #{openId}
+    </update>
 </mapper>

@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface WxThirdMapper extends BaseMapper<WxThird> {
 
 
+    Integer selectCountByWxOpenId(String openId);
+
 }
