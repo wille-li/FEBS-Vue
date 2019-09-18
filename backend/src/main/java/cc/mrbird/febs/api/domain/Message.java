@@ -47,5 +47,8 @@ public class Message implements Serializable {
 	
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
+	
+	@ApiModelProperty(value = "多个消息接收者")
+	private String userIdS;  
 
 }

@@ -29,9 +29,9 @@ public class MessageController extends BaseController{
 	 MessageService messageService;
 
     @Log("我的消息")
-    @GetMapping("/selectMyMessage")
+    @GetMapping("/selectMyMessage/{userId}")
     @ApiOperation("我的消息")
-    public Result selectMyMessage(@PathVariable String userId) throws FebsException {
+    public Result selectMyMessage(@PathVariable Integer userId) throws FebsException {
         return ResultUtil.success(messageService.selectMessageList(userId));
     }
     

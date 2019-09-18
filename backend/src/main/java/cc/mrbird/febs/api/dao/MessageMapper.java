@@ -27,7 +27,7 @@ public interface MessageMapper extends BaseMapper<Message>{
      * @param userId
      * @return
      */
-	List<Message> selectMessageList(@Param("userId") String userId);
+	List<Message> selectMessageList(@Param("userId") Integer userId);
 	/**
 	 * 消息列表增加（包含多个）
 	 * @param message

@@ -42,7 +42,9 @@ public class AnswerController extends BaseController {
     public Result add(@Valid AnswerVO answerVO) throws FebsException {
         Answer answer = new Answer();
         BeanUtils.copyProperties(answerVO, answer, "id");
+        
         answer.setCreateTime(Calendar.getInstance().getTime());
+        
         this.answerService.save(answer);
         return ResultUtil.success();
     }

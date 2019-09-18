@@ -15,7 +15,8 @@ import cc.mrbird.febs.api.domain.Message;
  */
 public interface MessageService extends IService<Message> {
 
-	List<Message> selectMessageList(String userId);
 
 	Integer addMessage(@Valid Message message);
+
+	List<Message> selectMessageList(Integer userId);
 }

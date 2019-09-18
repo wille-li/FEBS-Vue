@@ -23,11 +23,10 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 	@Autowired
     private MessageMapper messageMapper;
 	@Override
-	public List<Message> selectMessageList(String userId) {
+	public List<Message> selectMessageList(Integer userId) {
 		// TODO Auto-generated method stub
 		return messageMapper.selectMessageList(userId);
 	}
-	
 	@Override
 	@Transactional
 	public Integer addMessage(@Valid Message message) {

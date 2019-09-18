@@ -23,12 +23,12 @@
   </select>
   
   <!-- 查询我的消息 如果userid为空 查询所有 -->
-  <select id="selectMessageList" resultMap="BaseResultMap"  >
+  <select id="selectMessageList" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
     select 
     <include refid="Base_Column_List" />
     from message
      <if test="userId != null" >
-        where user_id =#{userId}
+        where user_id =#{userId,jdbcType=INTEGER}
      </if>
   </select>
   
@@ -47,13 +47,13 @@
   </insert>
   
   <insert id="addMessage" parameterType="cc.mrbird.febs.api.domain.Message" >
-    insert into message (id, message_type, message_content, 
+    insert into message ( message_type, message_content, 
       message_status, message_time, user_id, 
       create_by, create_time) values
-      <foreach collection="list" item="item" index="index"
+      <foreach collection="userIdS.split(',')" item="item" index="index"
             separator=",">
-      (#{id,jdbcType=INTEGER}, #{messageType,jdbcType=VARCHAR}, #{messageContent,jdbcType=VARCHAR}, 
-      #{messageStatus,jdbcType=INTEGER}, #{messageTime,jdbcType=TIMESTAMP}, #{item.userId}, 
+      ( #{messageType,jdbcType=VARCHAR}, #{messageContent,jdbcType=VARCHAR}, 
+      #{messageStatus,jdbcType=INTEGER}, #{messageTime,jdbcType=TIMESTAMP}, #{item}, 
       #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
      </foreach>
   </insert>
