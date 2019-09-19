@@ -20,6 +20,7 @@ import cc.mrbird.febs.api.vo.MessageVO;
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.controller.BaseController;
 import cc.mrbird.febs.common.exception.FebsException;
+import cc.mrbird.febs.common.utils.FebsUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -44,6 +45,7 @@ public class MessageController extends BaseController{
     public Result addMessage(@Valid MessageVO vo) throws FebsException {
     	Message mes = new Message();
     	BeanUtils.copyProperties(vo, mes, "id");
+    	mes.setCreateBy(FebsUtil.getCurrentUser().getUsername());
     	mes.setCreateTime(Calendar.getInstance().getTime());
         return ResultUtil.success(messageService.addMessage(mes));
     }
