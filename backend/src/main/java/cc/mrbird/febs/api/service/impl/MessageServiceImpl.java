@@ -25,6 +25,8 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 	@Override
 	public List<Message> selectMessageList(Integer userId) {
 		// TODO Auto-generated method stub
+		//把所有自身消息改为已读
+		messageMapper.updateMessageStatusByUserId(userId);
 		return messageMapper.selectMessageList(userId);
 	}
 	@Override

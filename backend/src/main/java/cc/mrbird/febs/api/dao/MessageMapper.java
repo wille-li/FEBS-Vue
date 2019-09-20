@@ -34,4 +34,9 @@ public interface MessageMapper extends BaseMapper<Message>{
 	 * @return
 	 */
 	Integer addMessage(@Valid Message message);
+	/**
+	 * 修改消息状态是否已读
+	 * @param userId
+	 */
+	void updateMessageStatusByUserId(@Param("userId")Integer userId);
 }
