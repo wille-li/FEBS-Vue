@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/message")
 @Api(value="获取消息控制器",tags={"用于微信鉴权获取用户消息"})
-public class MessageController extends BaseController{
+public class MessageApiController extends BaseController{
 	
 	 @Autowired
 	 MessageService messageService;
