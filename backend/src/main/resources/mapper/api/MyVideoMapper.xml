@@ -17,6 +17,13 @@
     from my_video
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+    <select id ="selectListByUserId" parameterType="java.lang.Integer">
+ 	 select 
+    <include refid="Base_Column_List" />
+    from my_video
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from my_video
     where id = #{id,jdbcType=INTEGER}

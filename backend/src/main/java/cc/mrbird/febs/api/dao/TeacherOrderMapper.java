@@ -1,11 +1,17 @@
 package cc.mrbird.febs.api.dao;
 
-import cc.mrbird.febs.api.domain.TeacherOrder;
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import cc.mrbird.febs.api.domain.TeacherOrder;
+import cc.mrbird.febs.api.domain.UserOrder;
+
 /**
- * @author lzz
+ * @author hw
  */
 public interface TeacherOrderMapper extends BaseMapper<TeacherOrder> {
+
+	List<UserOrder> selectListByUserId(Integer userId);
 
 }

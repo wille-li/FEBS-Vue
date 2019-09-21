@@ -16,6 +16,13 @@
     from article_favorite
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id ="selectListByUserId" parameterType="java.lang.Integer">
+ 	 select 
+    <include refid="Base_Column_List" />
+    from article_favorite
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from article_favorite
     where id = #{id,jdbcType=INTEGER}

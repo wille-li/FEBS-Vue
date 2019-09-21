@@ -1,27 +1,26 @@
 package cc.mrbird.febs.api.controller;
 
 
-import cc.mrbird.febs.api.domain.Answer;
-import cc.mrbird.febs.api.domain.Course;
-import cc.mrbird.febs.api.domain.Result;
-import cc.mrbird.febs.api.service.CourseService;
-import cc.mrbird.febs.api.util.ResultUtil;
-import cc.mrbird.febs.api.vo.AnswerVO;
-import cc.mrbird.febs.api.vo.CourseVO;
-import cc.mrbird.febs.common.annotation.Log;
-import cc.mrbird.febs.common.exception.FebsException;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.Calendar;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.Calendar;
+import cc.mrbird.febs.api.domain.Course;
+import cc.mrbird.febs.api.domain.Result;
+import cc.mrbird.febs.api.service.CourseService;
+import cc.mrbird.febs.api.util.ResultUtil;
+import cc.mrbird.febs.api.vo.CourseVO;
+import cc.mrbird.febs.common.annotation.Log;
+import cc.mrbird.febs.common.exception.FebsException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * @author lzz
@@ -43,7 +42,7 @@ public class CourseController {
         course.setCreateTime(Calendar.getInstance().getTime());
         course.setLearningCount(0);
         this.courseService.save(course);
-        return ResultUtil.success();
+        return ResultUtil.success();	
     }
 
     @Log("所有课程")

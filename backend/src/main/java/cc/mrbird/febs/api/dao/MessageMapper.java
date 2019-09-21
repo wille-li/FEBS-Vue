@@ -9,19 +9,12 @@ import org.apache.ibatis.annotations.Param;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import cc.mrbird.febs.api.domain.Message;
-
+/**
+ * 
+ * @author hw
+ *
+ */
 public interface MessageMapper extends BaseMapper<Message>{
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Message record);
-
-    int insertSelective(Message record);
-
-    Message selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Message record);
-
-    int updateByPrimaryKey(Message record);
     /**
      * 查询消息列表 userID为空 查询所有消息
      * @param userId

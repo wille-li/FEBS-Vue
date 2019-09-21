@@ -1,32 +1,28 @@
 package cc.mrbird.febs.api.controller;
 
 
-import cc.mrbird.febs.api.domain.Answer;
-import cc.mrbird.febs.api.domain.Article;
-import cc.mrbird.febs.api.domain.Result;
-import cc.mrbird.febs.api.service.ArticleService;
-import cc.mrbird.febs.api.util.ResultUtil;
-import cc.mrbird.febs.api.vo.AnswerVO;
-import cc.mrbird.febs.api.vo.ArticleVO;
-import cc.mrbird.febs.common.annotation.Log;
-import cc.mrbird.febs.common.controller.BaseController;
-import cc.mrbird.febs.common.domain.QueryRequest;
-import cc.mrbird.febs.common.exception.FebsException;
-import cc.mrbird.febs.system.domain.SysLog;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import java.util.Calendar;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.Map;
+import cc.mrbird.febs.api.domain.Article;
+import cc.mrbird.febs.api.domain.Result;
+import cc.mrbird.febs.api.service.ArticleService;
+import cc.mrbird.febs.api.util.ResultUtil;
+import cc.mrbird.febs.api.vo.ArticleVO;
+import cc.mrbird.febs.common.annotation.Log;
+import cc.mrbird.febs.common.controller.BaseController;
+import cc.mrbird.febs.common.domain.QueryRequest;
+import cc.mrbird.febs.common.exception.FebsException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * @author lzz

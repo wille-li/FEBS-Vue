@@ -1,10 +1,6 @@
-package cc.mrbird.febs.api.domain;
+package cc.mrbird.febs.api.vo;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +12,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "ArticleFavorite对象", description = "文章收藏表")
-public class ArticleFavorite implements Serializable{
+public class ArticleFavoriteVO implements Serializable{
 	/**
 	 * 消息表
 	 * 
@@ -24,8 +20,6 @@ public class ArticleFavorite implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@TableId(value = "id", type = IdType.AUTO)
-	private Integer id;
 	
 	@ApiModelProperty(value = "用户id")
     private Integer userId;
@@ -33,6 +27,4 @@ public class ArticleFavorite implements Serializable{
 	@ApiModelProperty(value = "文章id")
     private Integer articleId;
 
-	@ApiModelProperty(value = "创建时间")
-    private Date createTime;
 }

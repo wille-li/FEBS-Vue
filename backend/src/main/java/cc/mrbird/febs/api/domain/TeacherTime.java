@@ -32,9 +32,6 @@ public class TeacherTime implements Serializable{
 	@ApiModelProperty(value = "用户id")
     private Integer teacherId;
 
-	@ApiModelProperty(value = "老师预约表id")
-    private Integer teacherOrderId;
-
 	@ApiModelProperty(value = "档期开始时间")
     private Date scheduleStartTime;
 
@@ -50,67 +47,4 @@ public class TeacherTime implements Serializable{
 	@ApiModelProperty(value = "创建人")
     private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public Integer getTeacherOrderId() {
-        return teacherOrderId;
-    }
-
-    public void setTeacherOrderId(Integer teacherOrderId) {
-        this.teacherOrderId = teacherOrderId;
-    }
-
-    public Date getScheduleStartTime() {
-        return scheduleStartTime;
-    }
-
-    public void setScheduleStartTime(Date scheduleStartTime) {
-        this.scheduleStartTime = scheduleStartTime;
-    }
-
-    public Date getScheduleEndTime() {
-        return scheduleEndTime;
-    }
-
-    public void setScheduleEndTime(Date scheduleEndTime) {
-        this.scheduleEndTime = scheduleEndTime;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

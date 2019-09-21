@@ -1,20 +1,21 @@
 package cc.mrbird.febs.api.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import cc.mrbird.febs.api.domain.Result;
 import cc.mrbird.febs.api.util.ResultUtil;
 import cc.mrbird.febs.api.vo.MsgVO;
-import cc.mrbird.febs.api.vo.WxResVO;
-import cc.mrbird.febs.api.vo.WxSessionVO;
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.exception.FebsException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/msg")

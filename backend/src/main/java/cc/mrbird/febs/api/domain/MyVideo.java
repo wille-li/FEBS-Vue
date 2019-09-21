@@ -39,44 +39,4 @@ public class MyVideo implements Serializable{
 
 	@ApiModelProperty(value = "购买时间")
     private Date buyingTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
-    }
-
-    public Double getBuyingPrice() {
-        return buyingPrice;
-    }
-
-    public void setBuyingPrice(Double buyingPrice) {
-        this.buyingPrice = buyingPrice;
-    }
-
-    public Date getBuyingTime() {
-        return buyingTime;
-    }
-
-    public void setBuyingTime(Date buyingTime) {
-        this.buyingTime = buyingTime;
-    }
 }

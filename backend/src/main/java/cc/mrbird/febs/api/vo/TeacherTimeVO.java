@@ -1,4 +1,4 @@
-package cc.mrbird.febs.api.domain;
+package cc.mrbird.febs.api.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,24 +15,26 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "ArticleFavorite对象", description = "文章收藏表")
-public class ArticleFavorite implements Serializable{
+@ApiModel(value = "TeacherTime对象", description = "教师档期时间表")
+
+public class TeacherTimeVO implements Serializable{
+	
 	/**
-	 * 消息表
+	 * 教师档期时间表
 	 * 
 	 * @author hw
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@TableId(value = "id", type = IdType.AUTO)
-	private Integer id;
-	
-	@ApiModelProperty(value = "用户id")
-    private Integer userId;
-	
-	@ApiModelProperty(value = "文章id")
-    private Integer articleId;
 
-	@ApiModelProperty(value = "创建时间")
-    private Date createTime;
+	@ApiModelProperty(value = "用户id")
+    private Integer teacherId;
+
+	@ApiModelProperty(value = "档期开始时间")
+    private Date scheduleStartTime;
+
+	@ApiModelProperty(value = "档期结束时间")
+    private Date scheduleEndTime;
+	
+	@ApiModelProperty(value = "状态   空档  0 ;已约 1 ;完成 2 '")
+    private Integer status;
 }

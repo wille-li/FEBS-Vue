@@ -1,17 +1,18 @@
 package cc.mrbird.febs.api.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import cc.mrbird.febs.api.domain.ArticleFavorite;
+/**
+ * 
+ * @author hw
+ *
+ */
+public interface ArticleFavoriteMapper extends BaseMapper<ArticleFavorite>{
 
-public interface ArticleFavoriteMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(ArticleFavorite record);
-
-    int insertSelective(ArticleFavorite record);
-
-    ArticleFavorite selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(ArticleFavorite record);
-
-    int updateByPrimaryKey(ArticleFavorite record);
+	List<ArticleFavorite> selectListByUserId(@Param("userId") Integer userId);
 }
