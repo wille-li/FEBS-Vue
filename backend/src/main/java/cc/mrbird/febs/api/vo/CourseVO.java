@@ -12,6 +12,9 @@ public class CourseVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "课程id")
+    private Integer id;
+
     @ApiModelProperty(value = "列表图片")
     private String imageUrl;
 
