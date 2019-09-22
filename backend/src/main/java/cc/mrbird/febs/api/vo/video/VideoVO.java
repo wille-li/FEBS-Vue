@@ -1,4 +1,4 @@
-package cc.mrbird.febs.api.vo;
+package cc.mrbird.febs.api.vo.video;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

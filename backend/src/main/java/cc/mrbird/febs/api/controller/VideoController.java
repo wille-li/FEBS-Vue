@@ -1,14 +1,16 @@
 package cc.mrbird.febs.api.controller;
 
-import cc.mrbird.febs.api.domain.Course;
 import cc.mrbird.febs.api.domain.Result;
 import cc.mrbird.febs.api.domain.Video;
-import cc.mrbird.febs.api.service.CourseService;
 import cc.mrbird.febs.api.service.VideoService;
 import cc.mrbird.febs.api.util.ResultUtil;
-import cc.mrbird.febs.api.vo.VideoVO;
+import cc.mrbird.febs.api.vo.video.VideoQueryVO;
+import cc.mrbird.febs.api.vo.video.VideoVO;
 import cc.mrbird.febs.common.annotation.Log;
+import cc.mrbird.febs.common.controller.BaseController;
+import cc.mrbird.febs.common.domain.QueryRequest;
 import cc.mrbird.febs.common.exception.FebsException;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Calendar;
-import java.util.Objects;
+import java.util.Map;
 
 /**
  * @Author Lin
@@ -28,14 +30,10 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/api/video")
 @Api(value = "视频 API", tags = {"视频相关接口"})
-public class VideoController {
-
+public class VideoController extends BaseController {
 
     @Autowired
     private VideoService videoService;
-
-    @Autowired
-    private CourseService courseService;
 
     @Log("添加视频")
     @PostMapping("/add")
@@ -55,6 +53,14 @@ public class VideoController {
         return ResultUtil.success(this.videoService.list());
     }
 
+    @Log("分页查询课程")
+    @GetMapping("listPage")
+    @ApiOperation("分页查询课程")
+    public Map<String, Object> listPage(QueryRequest queryRequest, VideoQueryVO vo) {
+        IPage<Video> data = videoService.listPage(queryRequest, vo);
+        return getDataTable(data);
+    }
+
     @Log("更新视频")
     @PostMapping("/update")
     @ApiOperation("更新视频")
@@ -65,15 +71,9 @@ public class VideoController {
         }
 
         BeanUtils.copyProperties(vo, video);
-        if(vo.getCourseId() != null && !Objects.equals(vo.getCourseId(),video.getCourseId())){
-            Course course = courseService.getById(vo.getCourseId());
-            if(course == null){
-                return ResultUtil.fail("视频相关的课程不存在");
-            }
-        }
 
         boolean result = videoService.updateById(video);
-        if(!result){
+        if (!result) {
             return ResultUtil.fail("更新失败");
         }
 
@@ -84,9 +84,9 @@ public class VideoController {
     @Log("删除视频")
     @GetMapping("/delete/{id}")
     @ApiOperation("删除视频")
-    public Result delete(@NotBlank(message = "{required}") @PathVariable Integer id){
+    public Result delete(@NotBlank(message = "{required}") @PathVariable Integer id) {
         boolean result = videoService.removeById(id);
-        if(!result){
+        if (!result) {
             return ResultUtil.fail("删除视频失败");
         }
         return ResultUtil.success();
