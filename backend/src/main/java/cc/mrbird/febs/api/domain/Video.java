@@ -19,30 +19,22 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Course对象", description="视频表")
-public class Course implements Serializable {
+@ApiModel(value="Video对象", description="视频表")
+public class Video implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "列表图片")
-    private String imageUrl;
+    @ApiModelProperty(value = "视频名称")
+    private String name;
 
-    @ApiModelProperty(value = "主标题")
-    private String title;
+    @ApiModelProperty(value = "视频URL")
+    private String videoUrl;
 
-    @ApiModelProperty(value = "子标题")
-    private String subTitle;
-
-    @ApiModelProperty(value = "价格")
-    private Integer price;
-
-    @ApiModelProperty(value = "老师ID")
-    private Integer teacherId;
-
-    @ApiModelProperty(value = "学习人数")
-    private Integer learningCount;
+    @ApiModelProperty(value = "课程id")
+    private Integer courseId;
 
     @ApiModelProperty(value = "创建人")
     private String createBy;
