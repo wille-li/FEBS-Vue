@@ -61,7 +61,7 @@ public class MobileArticleController extends BaseController {
     @ApiOperation("点赞文章")
     @PostMapping("like")
     public Result like(Integer id) throws FebsException {
-        // TODO: 添加内容
+        // TODO:  添加内容
         return ResultUtil.success();
     }
 
