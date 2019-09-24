@@ -14,4 +14,6 @@ public interface TeacherOrderService extends IService<TeacherOrder> {
 
 	List<UserOrder> selectListByUserId(Integer userId);
 
+	int addAllTeacherOrder(TeacherOrder teacherOrder);
+
 }

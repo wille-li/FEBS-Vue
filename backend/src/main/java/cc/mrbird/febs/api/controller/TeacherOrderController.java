@@ -42,8 +42,8 @@ public class TeacherOrderController {
 	@GetMapping("/selectAllTeacherOrder")
 	@ApiOperation("查询我的所有预约")
 	public Result selectAllTeacherOrder() throws FebsException {
-		Integer userId = FebsUtil.getCurrentUser().getUserId().intValue();
-		return ResultUtil.success(this.teacherOrderSerivce.selectListByUserId(userId));
+		//Integer userId = FebsUtil.getCurrentUser().getUserId().intValue();
+		return ResultUtil.success(this.teacherOrderSerivce.selectListByUserId(10086));
 	}
 	
 	@Log("新增预约")
@@ -51,9 +51,11 @@ public class TeacherOrderController {
 	@ApiOperation("新增我的预约")
 	public Result addAllTeacherOrder(@Valid TeacherOrderVO vo) throws FebsException {
 		TeacherOrder teacherOrder = new TeacherOrder();
-		BeanUtils.copyProperties(teacherOrder, vo, "id");
+		BeanUtils.copyProperties(vo, teacherOrder, "id");
 		teacherOrder.setCreateTime(Calendar.getInstance().getTime());
-		this.teacherOrderSerivce.save(teacherOrder);
+		teacherOrder.setCreateBy("黄某人");
+		this.teacherOrderSerivce.addAllTeacherOrder(teacherOrder);
 		return ResultUtil.success();
 	}
+	
 }

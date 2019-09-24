@@ -1,6 +1,7 @@
 package cc.mrbird.febs.api.vo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -26,15 +27,15 @@ public class TeacherTimeVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "用户id")
+	@ApiModelProperty(value = "老师id")
     private Integer teacherId;
 
 	@ApiModelProperty(value = "档期开始时间")
-    private Date scheduleStartTime;
+    private LocalDateTime scheduleStartTime;
 
 	@ApiModelProperty(value = "档期结束时间")
-    private Date scheduleEndTime;
+    private LocalDateTime scheduleEndTime;
 	
-	@ApiModelProperty(value = "状态   空档  0 ;已约 1 ;完成 2 '")
-    private Integer status;
+	//@ApiModelProperty(value = "状态   空档  0 ;已约 1 ;完成 2 '")
+   // private Integer status;
 }

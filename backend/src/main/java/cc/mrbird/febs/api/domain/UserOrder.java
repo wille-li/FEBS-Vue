@@ -26,6 +26,9 @@ public class UserOrder implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+    
+    @ApiModelProperty(value = "老师预约表id")
+    private Integer teacherTimeId;
 
     @ApiModelProperty(value = "预约开始时间")
     private LocalDateTime startTime;
@@ -40,7 +43,7 @@ public class UserOrder implements Serializable {
     private Integer status;
 	
     @ApiModelProperty(value = "教师名字")
-    private String teacherName;
+    private String name;
     
     @ApiModelProperty(value = "用户头像")
     private String avatar;

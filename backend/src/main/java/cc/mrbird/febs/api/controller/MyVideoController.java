@@ -45,6 +45,7 @@ public class MyVideoController {
 		MyVideo MyVideo = new MyVideo();
 		BeanUtils.copyProperties(MyVideoVO, MyVideo, "id");
 		MyVideo.setBuyingTime(Calendar.getInstance().getTime());
+		MyVideo.setUserId(10086);
 		this.MyVideoService.save(MyVideo);
 		return ResultUtil.success();
 	}
@@ -61,7 +62,7 @@ public class MyVideoController {
 	@GetMapping("/selectMyVideo")
 	@ApiOperation("查询我的所有视频")
 	public Result selectAllMessage() throws FebsException {
-		Integer userId = FebsUtil.getCurrentUser().getUserId().intValue();
-		return ResultUtil.success(this.MyVideoService.selectListByUserId(userId));
+		//Integer userId = FebsUtil.getCurrentUser().getUserId().intValue();
+		return ResultUtil.success(this.MyVideoService.selectListByUserId(10086));
 	}
 }

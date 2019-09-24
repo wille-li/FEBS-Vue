@@ -19,6 +19,16 @@
     from teacher_time
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectTeacherTimeList" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher_time
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+    and #{scheduleStartTime} &gt;= schedule_start_time  and  #{scheduleEndTime} &lt;= schedule_end_time
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from teacher_time
     where id = #{id,jdbcType=INTEGER}

@@ -25,11 +25,8 @@ public class MyVideoVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@TableId(value = "id", type = IdType.AUTO)
-	private Integer id;
-	
-	@ApiModelProperty(value = "用户id")
-    private Integer userId;
+	//@ApiModelProperty(value = "用户id")
+   // private Integer userId;
 
 	@ApiModelProperty(value = "视频id")
     private Integer videoId;
@@ -37,7 +34,7 @@ public class MyVideoVO implements Serializable{
 	@ApiModelProperty(value = "购买价格")
     private Double buyingPrice;
 
-	@ApiModelProperty(value = "购买时间")
-    private Date buyingTime;
+	//@ApiModelProperty(value = "购买时间")
+    //private Date buyingTime;
 
 }

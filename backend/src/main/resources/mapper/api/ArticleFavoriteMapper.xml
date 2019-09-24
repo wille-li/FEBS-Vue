@@ -17,7 +17,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id ="selectListByUserId" parameterType="java.lang.Integer">
+  <select id ="selectListByUserId" resultMap="BaseResultMap">
  	 select 
     <include refid="Base_Column_List" />
     from article_favorite

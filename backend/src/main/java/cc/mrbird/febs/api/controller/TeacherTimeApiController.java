@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,9 +40,17 @@ public class TeacherTimeApiController {
     	
     	TeacherTime teacherTime = new TeacherTime();
     	BeanUtils.copyProperties(vo, teacherTime, "id");
-    	teacherTime.setCreateBy(FebsUtil.getCurrentUser().getUsername());
+    	//teacherTime.setCreateBy(FebsUtil.getCurrentUser().getUsername());
+    	teacherTime.setCreateBy("黄某人");
+    	teacherTime.setStatus(0);//空闲
     	teacherTime.setCreateTime(Calendar.getInstance().getTime());
         return ResultUtil.success(teacherTimeService.save(teacherTime));
     }
 
+	@Log("查询教师档期时间")
+	@GetMapping("/selectTeacherTimeList")
+	@ApiOperation("查询教师档期时间")
+	public Result selectTeacherTimeList(@Valid TeacherTimeVO vo) throws FebsException {
+		return ResultUtil.success(this.teacherTimeService.selectTeacherTimeList(vo));
+	}
 }

@@ -30,7 +30,8 @@
   
     <select id="selectListByUserId" resultMap="UserOrderMap"  >
    select 
-    t.id, t.teacher_time_id,t.start_time,t.end_time,t2.`name`,t1.`status`
+    t.id, t.teacher_time_id,t.start_time,t.end_time,t2.`name`,t1.`status`,t.user_id,
+  t2.avatar
     from teacher_order  t 
     LEFT JOIN teacher_time t1 on t.teacher_time_id = t1.id
     left join teacher t2 on t2.id = t1.teacher_id 

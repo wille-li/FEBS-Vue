@@ -21,8 +21,8 @@ public class ArticleFavoriteVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	@ApiModelProperty(value = "用户id")
-    private Integer userId;
+	//@ApiModelProperty(value = "用户id")
+    //private Integer userId;
 	
 	@ApiModelProperty(value = "文章id")
     private Integer articleId;
