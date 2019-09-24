@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.mrbird.febs.api.dao.MyVideoMapper" >
+  <resultMap id="BaseResultMap" type="cc.mrbird.febs.api.domain.MyVideo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="buying_price" property="buyingPrice" jdbcType="DOUBLE" />
+    <result column="buying_time" property="buyingTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, video_id, buying_price, buying_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+    <select id ="selectListByUserId" parameterType="java.lang.Integer">
+ 	 select 
+    <include refid="Base_Column_List" />
+    from my_video
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from my_video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cc.mrbird.febs.api.domain.MyVideo" >
+    insert into my_video (id, user_id, video_id, 
+      buying_price, buying_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, 
+      #{buyingPrice,jdbcType=DOUBLE}, #{buyingTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.mrbird.febs.api.domain.MyVideo" >
+    insert into my_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="buyingPrice != null" >
+        buying_price,
+      </if>
+      <if test="buyingTime != null" >
+        buying_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="buyingPrice != null" >
+        #{buyingPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="buyingTime != null" >
+        #{buyingTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.mrbird.febs.api.domain.MyVideo" >
+    update my_video
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="buyingPrice != null" >
+        buying_price = #{buyingPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="buyingTime != null" >
+        buying_time = #{buyingTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.mrbird.febs.api.domain.MyVideo" >
+    update my_video
+    set user_id = #{userId,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER},
+      buying_price = #{buyingPrice,jdbcType=DOUBLE},
+      buying_time = #{buyingTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

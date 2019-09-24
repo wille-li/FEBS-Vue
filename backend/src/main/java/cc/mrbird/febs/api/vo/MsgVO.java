@@ -1,8 +1,8 @@
 package cc.mrbird.febs.api.vo;
 
-import lombok.Data;
-
 import java.io.Serializable;
+
+import lombok.Data;
 
 @Data
 public class MsgVO implements Serializable {
