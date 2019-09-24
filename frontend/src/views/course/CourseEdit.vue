@@ -38,10 +38,15 @@
                   ]}]"/>
       </a-form-item>
       <a-form-item label='老师' v-bind="formItemLayout">
-        <a-input v-decorator="['teacherId',
-                   {rules: [
-                    { required: true, message: '老师不能为空'}
-                  ]}]"/>
+         <a-select
+          :allowClear="true"
+          style="width: 100%"
+          v-decorator="[
+            'teacherId',
+            {rules: [{ required: true, message: '请选择老师' }]}
+          ]">
+          <a-select-option v-for="r in roleData" :key="r.id">{{r.name}}</a-select-option>
+        </a-select>
       </a-form-item>
     </a-form>
     <div class="drawer-bootom-button">
@@ -70,6 +75,7 @@ export default {
       formItemLayout,
       form: this.$form.createForm(this),
       validateStatus: '',
+      roleData: [],
       help: '',
       course: {}
     }
@@ -112,6 +118,15 @@ export default {
           })
         }
       })
+    }
+  },
+  watch: {
+    courseEditVisiable () {
+      if (this.courseEditVisiable) {
+        this.$get('api/teacher/list').then((r) => {
+          this.roleData = r.data.data
+        })
+      }
     }
   }
 }

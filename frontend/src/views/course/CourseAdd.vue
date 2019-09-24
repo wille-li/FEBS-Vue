@@ -43,11 +43,13 @@
                   ]}]"/>
       </a-form-item>
       <a-form-item label='老师' v-bind="formItemLayout">
-       <a-input v-model="job.teacherId"
-                 v-decorator="['teacherId',
-                   {rules: [
-                    { required: true, message: '老师不能为空'}
-                  ]}]"/>
+       <a-select
+          v-model="job.teacherId"
+          :allowClear="true"
+          style="width: 100%"
+          v-decorator="['teacherId',{rules: [{ required: true, message: '请选择老师' }]}]">
+          <a-select-option v-for="r in roleData" :key="r.id">{{r.name}}</a-select-option>
+        </a-select>
       </a-form-item>
     </a-form>
     <div class="drawer-bootom-button">
@@ -78,6 +80,7 @@ export default {
       job: {
         cronExpression: ''
       },
+      roleData: [],
       validateStatus: '',
       help: ''
     }
@@ -106,6 +109,15 @@ export default {
           })
         }
       })
+    }
+  },
+  watch: {
+    courseAddVisiable () {
+      if (this.courseAddVisiable) {
+        this.$get('api/teacher/list').then((r) => {
+          this.roleData = r.data.data
+        })
+      }
     }
   }
 }
