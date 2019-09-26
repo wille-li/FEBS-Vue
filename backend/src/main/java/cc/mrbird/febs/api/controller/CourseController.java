@@ -11,6 +11,7 @@ import cc.mrbird.febs.api.service.VideoService;
 import cc.mrbird.febs.api.util.ResultUtil;
 import cc.mrbird.febs.api.vo.course.CourseQueryVO;
 import cc.mrbird.febs.api.vo.course.CourseVO;
+import cc.mrbird.febs.api.vo.course.DistributeVO;
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.controller.BaseController;
 import cc.mrbird.febs.common.domain.QueryRequest;
@@ -131,21 +132,17 @@ public class CourseController extends BaseController {
     @Log("分配视频")
     @PostMapping("/distribute")
     @ApiOperation("分配视频")
-    public Result distributeVideo(Integer courseId, String videoIds){
-        Course course = courseService.getById(courseId);
+    public Result distributeVideo(@Valid DistributeVO vo){
+        Course course = courseService.getById(vo.getCourseId());
         if(course == null){
             return ResultUtil.fail("课程不存在，请重新选择");
         }
-        String[] ids = videoIds.split(StringPool.COMMA);
-        List<Integer> vids = new ArrayList<>();
-        for (String id : ids) {
-            vids.add(Integer.parseInt(id));
-        }
-        List<Video> videos = (List<Video>) videoService.listByIds(vids);
+
+        List<Video> videos = (List<Video>) videoService.listByIds(vo.getVideoIds());
         if(CollectionUtils.isEmpty(videos)){
             return ResultUtil.fail("选择的视频不存在，请重新选择");
         }
-        videos.forEach(video -> video.setCourseId(courseId));
+        videos.forEach(video -> video.setCourseId(vo.getCourseId()));
         videoService.updateBatchById(videos);
         return ResultUtil.success();
     }
