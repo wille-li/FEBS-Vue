@@ -81,6 +81,8 @@
         </template>
          <template slot="operations" slot-scope="text, record">
           <a-icon v-hasPermission="'job:update'" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
+          &nbsp;
+          <a-icon v-hasPermission="'user:view'" type="eye" theme="twoTone" twoToneColor="#42b983" @click="view(record)" title="分配视频"></a-icon>
           <a-badge v-hasNoPermission="'job:update'" status="warning" text="无权限"></a-badge>
         </template>
       </a-table>
