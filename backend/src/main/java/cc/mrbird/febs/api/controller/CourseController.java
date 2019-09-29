@@ -123,4 +123,19 @@ public class CourseController extends BaseController {
         }
     }
 
+    @Log("获取课程")
+    @GetMapping("/{courseId}")
+    @ApiOperation("获取课程")
+    public Result get(@NotBlank(message = "{required}") @PathVariable String courseId){
+
+        try {
+            Course course = courseService.getById(courseId);
+            return ResultUtil.success(course);
+        } catch (Exception e) {
+            String message = "删除课程失败";
+            log.error(message, e);
+            return ResultUtil.fail(message);
+        }
+    }
+
 }
