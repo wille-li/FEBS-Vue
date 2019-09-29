@@ -6,28 +6,10 @@
          <a-row >
             <a-col :md="12" :sm="24" >
               <a-form-item
-                label="教师名称"
+                label="视频名称"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.teacherName"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="12" :sm="24" >
-              <a-form-item
-                label="主标题"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.title"/>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row >
-            <a-col :md="12" :sm="24" >
-              <a-form-item
-                label="子标题"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.subTitle"/>
+                <a-input v-model="queryParams.name"/>
               </a-form-item>
             </a-col>
           </a-row>
@@ -81,36 +63,34 @@
         </template>
          <template slot="operations" slot-scope="text, record">
           <a-icon v-hasPermission="'job:update'" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
-          &nbsp;
-          <a-icon v-hasPermission="'user:view'" type="eye" theme="twoTone" twoToneColor="#42b983" @click="view(record)" title="分配视频"></a-icon>
           <a-badge v-hasNoPermission="'job:update'" status="warning" text="无权限"></a-badge>
         </template>
       </a-table>
     </div>
     <!-- 新增任务 -->
-    <course-add
-      @success="handleCourseAddSuccess"
-      @close="handleCourseAddClose"
-      :courseAddVisiable="courseAddVisiable">
-    </course-add>
+    <video-add
+      @success="handleVideoAddSuccess"
+      @close="handleVideoAddClose"
+      :videoAddVisiable="videoAddVisiable">
+    </video-add>
     <!-- 修改任务 -->
-    <course-edit
-      ref="courseEdit"
-      @success="handleCourseEditSuccess"
-      @close="handleCourseEditClose"
-      :courseEditVisiable="courseEditVisiable">
-    </course-edit>
+    <video-edit
+      ref="videoEdit"
+      @success="handleVideoEditSuccess"
+      @close="handleVideoEditClose"
+      :videoEditVisiable="videoEditVisiable">
+    </video-edit>
   </a-card>
 </template>
 
 <script>
-import CourseAdd from './CourseAdd'
-import CourseEdit from './CourseEdit'
+import VideoAdd from './VideoAdd'
+import VideoEdit from './VideoEdit'
 import RangeDate from '@/components/datetime/RangeDate'
 
 export default {
-  name: 'Course',
-  components: {CourseAdd, CourseEdit, RangeDate},
+  name: 'Video',
+  components: {VideoAdd, VideoEdit, RangeDate},
   data () {
     return {
       advanced: false,
@@ -129,30 +109,21 @@ export default {
         showTotal: (total, range) => `显示 ${range[0]} ~ ${range[1]} 条记录，共 ${total} 条记录`
       },
       loading: false,
-      courseAddVisiable: false,
-      courseEditVisiable: false
+      videoAddVisiable: false,
+      videoEditVisiable: false
     }
   },
   computed: {
     columns () {
       return [{
-        title: '图片',
-        dataIndex: 'imageUrl'
+        title: '视频名称',
+        dataIndex: 'name'
       }, {
-        title: '主标题',
-        dataIndex: 'title'
+        title: '视频URL',
+        dataIndex: 'videoUrl'
       }, {
-        title: '子标题',
-        dataIndex: 'subTitle'
-      }, {
-        title: '价格',
-        dataIndex: 'price'
-      }, {
-        title: '老师',
-        dataIndex: 'teacherName'
-      }, {
-        title: '学习人数',
-        dataIndex: 'learningCount'
+        title: '课程标题',
+        dataIndex: 'courseTitle'
       }, {
         title: '创建人',
         dataIndex: 'createBy'
@@ -189,28 +160,28 @@ export default {
         this.queryParams.createTimeTo = value[1]
       }
     },
-    handleCourseAddSuccess () {
-      this.courseAddVisiable = false
+    handleVideoAddSuccess () {
+      this.videoAddVisiable = false
       this.$message.success('新增课程成功')
       this.search()
     },
-    handleCourseAddClose () {
-      this.courseAddVisiable = false
+    handleVideoAddClose () {
+      this.videoAddVisiable = false
     },
     add () {
-      this.courseAddVisiable = true
+      this.videoAddVisiable = true
     },
-    handleCourseEditSuccess () {
-      this.courseEditVisiable = false
+    handleVideoEditSuccess () {
+      this.videoEditVisiable = false
       this.$message.success('修改课程成功')
       this.search()
     },
-    handleCourseEditClose () {
-      this.courseEditVisiable = false
+    handleVideoEditClose () {
+      this.videoEditVisiable = false
     },
     edit (record) {
-      this.$refs.courseEdit.setFormValues(record)
-      this.courseEditVisiable = true
+      this.$refs.videoEdit.setFormValues(record)
+      this.videoEditVisiable = true
     },
     batchDelete () {
       if (!this.selectedRowKeys.length) {
@@ -223,11 +194,11 @@ export default {
         content: '当您点击确定按钮后，这些记录将会被彻底删除',
         centered: true,
         onOk () {
-          let courseIds = []
+          let videoIds = []
           for (let key of that.selectedRowKeys) {
-            courseIds.push(that.dataSource[key].id)
+            videoIds.push(that.dataSource[key].id)
           }
-          that.$delete('api/course/delete/' + courseIds.join(',')).then(() => {
+          that.$delete('api/video/delete/' + videoIds.join(',')).then(() => {
             that.$message.success('删除成功')
             that.selectedRowKeys = []
             that.search()
@@ -246,7 +217,7 @@ export default {
         sortField = sortedInfo.field
         sortOrder = sortedInfo.order
       }
-      this.$export('course/excel', {
+      this.$export('video/excel', {
         sortField: sortField,
         sortOrder: sortOrder,
         ...this.queryParams,
@@ -302,7 +273,7 @@ export default {
         params.pageSize = this.pagination.defaultPageSize
         params.pageNum = this.pagination.defaultCurrent
       }
-      this.$get('api/course/listPage', {
+      this.$get('api/video/listPage', {
         ...params
       }).then((r) => {
         let data = r.data

@@ -11,7 +11,12 @@ import java.util.List;
 @ApiModel(value="老师详情", description="老师详情")
 public class TeacherDetailVO implements Serializable{
 
-    @ApiModelProperty(value = "名称")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "名称")
     private String name;
 
     @ApiModelProperty(value = "称号")

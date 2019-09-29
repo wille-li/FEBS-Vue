@@ -1,11 +1,19 @@
 package cc.mrbird.febs.api.service;
 
-import cc.mrbird.febs.api.domain.TeacherOrder;
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import cc.mrbird.febs.api.domain.TeacherOrder;
+import cc.mrbird.febs.api.domain.UserOrder;
+
 /**
- * @author lzz
+ * @author hw
  */
 public interface TeacherOrderService extends IService<TeacherOrder> {
+
+	List<UserOrder> selectListByUserId(Integer userId);
+
+	int addAllTeacherOrder(TeacherOrder teacherOrder);
 
 }

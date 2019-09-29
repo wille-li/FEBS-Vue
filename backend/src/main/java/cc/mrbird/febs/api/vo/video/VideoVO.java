@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Author Lin
@@ -28,6 +29,12 @@ public class VideoVO implements Serializable {
     @ApiModelProperty("课程Id")
     private Integer courseId;
 
+    @ApiModelProperty("课程标题")
+    private String courseTitle;
+
     @ApiModelProperty(value = "创建人")
     private String createBy;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
 }

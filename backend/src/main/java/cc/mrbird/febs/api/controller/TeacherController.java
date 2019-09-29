@@ -1,27 +1,31 @@
 package cc.mrbird.febs.api.controller;
 
 
-import cc.mrbird.febs.api.domain.Answer;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import cc.mrbird.febs.api.domain.Result;
 import cc.mrbird.febs.api.domain.Teacher;
 import cc.mrbird.febs.api.service.TeacherService;
 import cc.mrbird.febs.api.util.ResultUtil;
-import cc.mrbird.febs.api.vo.AnswerVO;
 import cc.mrbird.febs.api.vo.BookingInfoVO;
 import cc.mrbird.febs.api.vo.TeacherDetailVO;
 import cc.mrbird.febs.api.vo.TeacherVO;
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.exception.FebsException;
 import io.swagger.annotations.Api;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * @author lzz

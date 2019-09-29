@@ -1,30 +1,26 @@
 package cc.mrbird.febs.api.controller;
 
 
-import cc.mrbird.febs.api.domain.Answer;
-import cc.mrbird.febs.api.domain.Question;
-import cc.mrbird.febs.api.domain.Result;
-import cc.mrbird.febs.api.service.QuestionService;
-import cc.mrbird.febs.api.util.Constant;
-import cc.mrbird.febs.api.util.ResultUtil;
-import cc.mrbird.febs.api.vo.AnswerVO;
-import cc.mrbird.febs.api.vo.QuestionVO;
-import cc.mrbird.febs.common.annotation.Log;
-import cc.mrbird.febs.common.exception.FebsException;
-import com.wuwenze.poi.util.Const;
-import io.swagger.annotations.Api;
+import java.util.Calendar;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import cc.mrbird.febs.api.domain.Question;
+import cc.mrbird.febs.api.domain.Result;
+import cc.mrbird.febs.api.service.QuestionService;
+import cc.mrbird.febs.api.util.Constant;
+import cc.mrbird.febs.api.util.ResultUtil;
+import cc.mrbird.febs.api.vo.QuestionVO;
+import cc.mrbird.febs.common.annotation.Log;
+import cc.mrbird.febs.common.exception.FebsException;
+import io.swagger.annotations.Api;
 
 /**
  * @author lzz

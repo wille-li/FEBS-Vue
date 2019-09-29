@@ -1,7 +1,22 @@
 package cc.mrbird.febs.api.service.impl;
 
-import cc.mrbird.febs.api.dao.WxThirdMapper;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.qcloudsms.httpclient.HTTPException;
+
+import cc.mrbird.febs.api.dao.WxThirdMapper;
 import cc.mrbird.febs.api.domain.WxThird;
 import cc.mrbird.febs.api.domain.wx.WxUserInfo;
 import cc.mrbird.febs.api.service.WxAuthService;
@@ -13,24 +28,7 @@ import cc.mrbird.febs.common.exception.RedisConnectException;
 import cc.mrbird.febs.common.service.RedisService;
 import cc.mrbird.febs.system.domain.User;
 import cc.mrbird.febs.system.service.UserService;
-import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.qcloudsms.SmsMultiSenderResult;
-import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
-import com.github.qcloudsms.httpclient.HTTPException;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 
 
 @Service
