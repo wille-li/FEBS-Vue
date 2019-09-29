@@ -89,9 +89,9 @@ public class WxAuthServiceImpl extends ServiceImpl<WxThirdMapper, WxThird> imple
 //        if (validateCode(vo.getPhoneNum(), vo.getCode())){
 //            throw new IllegalArgumentException("验证码不正确。");
 //        }
-        if (!vo.getPhoneNum().substring(5).equals(vo.getValidCode())){
-            throw new IllegalArgumentException("验证码不正确。");
-        }
+//        if (!vo.getPhoneNum().substring(5).equals(vo.getValidCode())){
+//            throw new IllegalArgumentException("验证码不正确。");
+//        }
 
         // 获取Session ID 做校验
         String openId = vo.getOpenid();
