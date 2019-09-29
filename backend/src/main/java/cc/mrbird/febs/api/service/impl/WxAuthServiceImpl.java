@@ -98,11 +98,11 @@ public class WxAuthServiceImpl extends ServiceImpl<WxThirdMapper, WxThird> imple
         String sessionKey = redisService.get(openId);
         String desc = WechatUtil.decryptData(vo.getEncryptedData(), sessionKey, vo.getIv());
         WxUserInfo wxUserInfo = JSON.parseObject(desc, WxUserInfo.class);
-        User user = userService.findByName(vo.getPhoneNum());
+        User user = userService.findByName(vo.getOpenid());
         if (null == user) {
             // 创建用户
             user = new User();
-            user.setUsername(vo.getPhoneNum());
+            user.setUsername(wxUserInfo.getOpenId());
             user.setPassword(wxUserInfo.getOpenId());
             user.setNickName(wxUserInfo.getNickName());
             user.setAvatar(wxUserInfo.getAvatarUrl());
