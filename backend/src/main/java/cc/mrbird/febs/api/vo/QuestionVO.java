@@ -19,4 +19,7 @@ public class QuestionVO {
 
     @ApiModelProperty(value = "提问费用" ,required=true)
     private Integer price;
+
+    @ApiModelProperty(value = "微信唯一id" ,required=true)
+    private String openId;
 }

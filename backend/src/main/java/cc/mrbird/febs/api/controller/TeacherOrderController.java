@@ -5,13 +5,11 @@ import java.util.Calendar;
 
 import javax.validation.Valid;
 
+import cc.mrbird.febs.system.domain.User;
+import cc.mrbird.febs.system.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cc.mrbird.febs.api.domain.MyVideo;
 import cc.mrbird.febs.api.domain.Result;
@@ -37,19 +35,25 @@ public class TeacherOrderController {
 	@Autowired
 	TeacherOrderService teacherOrderSerivce;
 
+	@Autowired
+	UserService userService;
+
 	
 	@Log("查询我的所有预约")
-	@GetMapping("/selectAllTeacherOrder")
+	@GetMapping("/selectAllTeacherOrder/{openId}")
 	@ApiOperation("查询我的所有预约")
-	public Result selectAllTeacherOrder() throws FebsException {
-		//Integer userId = FebsUtil.getCurrentUser().getUserId().intValue();
-		return ResultUtil.success(this.teacherOrderSerivce.selectListByUserId(10086));
+	public Result selectAllTeacherOrder(@PathVariable String openId) throws FebsException {
+		User user = userService.findByOpenId(openId);
+		if (user == null ) {
+			return ResultUtil.fail("user not found");
+		}
+		return ResultUtil.success(this.teacherOrderSerivce.selectListByUserId(user.getUserId().intValue()));
 	}
 	
 	@Log("新增预约")
 	@PostMapping("/addAllTeacherOrder")
 	@ApiOperation("新增我的预约")
-	public Result addAllTeacherOrder(@Valid TeacherOrderVO vo) throws FebsException {
+	public Result addAllTeacherOrder(@RequestBody @Valid TeacherOrderVO vo) throws FebsException {
 		TeacherOrder teacherOrder = new TeacherOrder();
 		BeanUtils.copyProperties(vo, teacherOrder, "id");
 		teacherOrder.setCreateTime(Calendar.getInstance().getTime());

@@ -1,6 +1,8 @@
 package cc.mrbird.febs.api.controller;
 
 
+import cc.mrbird.febs.system.domain.User;
+import cc.mrbird.febs.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,11 +25,18 @@ public class MessageApiController extends BaseController{
 	
 	 @Autowired
 	 MessageService messageService;
+	 @Autowired
+    UserService userService;
 
     @Log("我的消息")
-    @GetMapping("/selectMyMessage/{userId}")
+    @GetMapping("/selectMyMessage/{openId}")
     @ApiOperation("我的消息")
-    public Result selectMyMessage(@PathVariable Integer userId) throws FebsException {
-        return ResultUtil.success(messageService.selectMessageList(userId));
+    public Result selectMyMessage(@PathVariable String openId) throws FebsException {
+
+        User user = userService.findByOpenId(openId);
+        if (user ==null) {
+            return ResultUtil.fail("用户不存在");
+        }
+        return ResultUtil.success(messageService.selectMessageList(user.getUserId().intValue()));
     }
 }

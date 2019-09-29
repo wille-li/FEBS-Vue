@@ -7,10 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cc.mrbird.febs.api.domain.Question;
 import cc.mrbird.febs.api.domain.Result;
@@ -35,11 +32,12 @@ public class QuestionController {
 
     @Log("新增问题")
     @PostMapping
-    public Result add(@Valid QuestionVO questionVO) throws FebsException {
+    public Result add(@RequestBody  @Valid QuestionVO questionVO) throws FebsException {
         Question question = new Question();
         BeanUtils.copyProperties(questionVO, question, "id");
         question.setCreateTime(Calendar.getInstance().getTime());
         question.setStatus(Constant.INIT);
+        question.setCreateByWx(questionVO.getOpenId());
         this.questionService.save(question);
         return ResultUtil.success();
     }
